@@ -1,7 +1,7 @@
 {
   "name": "dang",
-  "version": "0.0.1",
-  "description": "data driven events",
+  "version": "0.0.3",
+  "description": "Data driven events, expression evaluation and more.",
   "main": "dist/index.js",
   "scripts": {
     "test": "grunt test",
