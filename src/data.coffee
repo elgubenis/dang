@@ -1,15 +1,6 @@
 EventEmitter = require 'eventemitter3'
 _ = require 'lodash'
 
-# sum = (numbers...) ->
-#   result = 0
-#   for number in numbers[0]
-#     result += number
-#   return result
-
-# fns =
-#   sum: sum
-
 class Data extends EventEmitter
   constructor: (json) ->
     @properties = {}
@@ -69,35 +60,7 @@ createScope = (stack) ->
   return scope
 
 myEval = _.debounce (exp, cb) ->
-  # exp = '(function() { ' + exp + ' }.call(this))'
-  # (->
-  #   x = eval(exp)
-  #   cb(x)
-  # ).call(@)
-  # if exp.match(/:/).length
-  #   exp = exp.replace(/:/g, '$range$')
-  #   left = exp.split('$range$')[0].split('(')[1]
-  #   right = exp.split('$range$')[1].split(')')[0]
-  #   startcolumn = left[0]
-  #   endcolumn = right[0]
-
-  #   startnum = left.substr(1, left.length-1)
-  #   endnum = right.substr(1, right.length-1)
-
-  #   range = left + '$range$' + right
-
-  #   @[range] = []
-  #   for key, value of @
-  #     if @[key]
-  #       if typeof(key) isnt 'function'
-  #         if key.indexOf('range') is -1
-  #           if key[0] is startcolumn or key[0] is endcolumn
-  #             currentRow = parseInt key.substr(1, key.length-1)
-  #             if currentRow >= startnum and currentRow <= endnum
-  #               @[range].push @[key]
-  #
   scope = createScope(@)
-
   x = (new Function 'with(this) { ' + exp + ' }').call(scope)
   cb(x)
 , 0
