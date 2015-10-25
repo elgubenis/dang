@@ -42,6 +42,22 @@ describe 'module behavior', ->
           done()
         store.get('b').value(100)
 
+describe 'standalone test', ->
+  it 'should create a few datas and evaluate correctly', (done) ->
+    store = new Dang
+
+    store.add name: 'm', value: 1
+    store.add name: 'c', value: 299792458
+    store.add name: 'E', expression: 'm*c*c'
+
+    store.get('E').on 'change:value', ->
+      assert.equal store.get('E').value(), 89875517873681760
+      done()
+
+
+
+
+
 
   # store = new Dang
 
