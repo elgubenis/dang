@@ -29,12 +29,12 @@ class Data extends EventEmitter
     if name is 'expression'
       @attachListeners(@stack)
     return
-  evaluate: (stack) ->
+  evaluate: ->
     expression = @get('expression')
     if expression
       if expression.indexOf('return') is -1
         expression = 'return ' + expression
-      myEval.call(stack, expression, (result) =>
+      myEval.call(@stack, expression, (result) =>
         @value(result)
       )
   attachListeners: (originalStack) ->
@@ -50,12 +50,12 @@ class Data extends EventEmitter
       # if a name is inside the expression, its a dependency of the current data
       for foreign in stack
         if expression.indexOf(foreign.get('name')) > -1
-          @evaluate(stack)
+          @evaluate()
           # console.log foreign.get('name'), 'is a dependency to', @get('name')
           # this foreign-data is a dependency of data, listen to its changes
           # and if it does change, evaluate the local-data's expression
           foreign.on 'change:value', =>
-            @evaluate(stack)
+            @evaluate()
 
     return
 
