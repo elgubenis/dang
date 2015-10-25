@@ -22,8 +22,8 @@ _ = require 'lodash'
       @stack = []
       return @
     # add data to a dang-store
-    add: (json) ->
-      return add.call(@stack, json)
+    add: ->
+      return add.apply(@stack, arguments)
     # get data from a dang-store
     get: (name) ->
       for data in @stack
@@ -36,7 +36,15 @@ _ = require 'lodash'
 Data = require './data'
 
 # Dang-store add method
-add = (json) ->
+add = (name,  value, expression) ->
+  if typeof(name) is 'object'
+    json = name
+  else
+    json =
+      name: name
+      value: value or undefined
+      expression: expression or undefined
+
   # create a new data from a json object
   data = new Data(json)
   # attach dang store to data, for coupling
