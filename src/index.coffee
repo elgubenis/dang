@@ -18,7 +18,9 @@ _ = require 'lodash'
 )(->
 
   class Dang
-    stack: []
+    constructor: ->
+      @stack = []
+      return @
     # add data to a dang-store
     add: (json) ->
       return add.call(@stack, json)
