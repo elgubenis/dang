@@ -1,27 +1,26 @@
 [![Build Status](https://travis-ci.org/elgubenis/varlidator.svg)](https://travis-ci.org/elgubenis/varlidator)
-[![Code Climate](https://codeclimate.com/github/elgubenis/varlidator/badges/gpa.svg)](https://codeclimate.com/github/elgubenis/varlidator)
-[![Test Coverage](https://codeclimate.com/github/elgubenis/varlidator/badges/coverage.svg)](https://codeclimate.com/github/elgubenis/varlidator/coverage)
+[![Code Climate](https://codeclimate.com/github/elgubenis/dang/badges/gpa.svg)](https://codeclimate.com/github/elgubenis/dang)
+[![Test Coverage](https://codeclimate.com/github/elgubenis/dang/badges/coverage.svg)](https://codeclimate.com/github/elgubenis/dang/coverage)
 
-# Varlidator
-JavaScript variable identifier validation. Try/Catch a new Function() which defines and returns a Boolean to a variable name.
+# Dang
+Data driven events, expression evaluation and more.
 
-#### JSPerf comparsion between valid and invalid variable names.
-http://jsperf.com/varlidator-valid-vs-invalid
 
 ### Install
 ```sh
-npm install varlidator --save
+npm install dang --save
 ```
 
 ### Usage
 ```js
-var varlidate = require('varlidator');
+var store = new Dang();
 
-var isValid = varlidate('@');
-// returns: false
+store.add({ name: 'm', value: 1 });
+store.add({ name: 'c', value: 299792458 });
+store.add({ name: 'E', expression: 'm*c*c' });
 
-isValid = varlidate('a');
-// returns: true
+store.get('E').on 'change:value', ->
+    console.log 'E=mc2 is ', store.get('E').value()
 ```
 
 ### How to develop
@@ -35,6 +34,3 @@ grunt
 npm install
 grunt build
 ```
-
-### Alternatives
-- https://github.com/mathiasbynens/mothereff.in/tree/master/js-variables
