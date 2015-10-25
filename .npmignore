@@ -1,0 +1,5 @@
+# do not include readable sources in the npm module
+src
+grunt
+test
+node_modules

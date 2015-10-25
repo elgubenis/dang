@@ -1,0 +1,39 @@
+{
+  "name": "dang",
+  "version": "0.0.1",
+  "description": "data driven events",
+  "main": "dist/index.js",
+  "scripts": {
+    "test": "grunt test",
+    "report": "open test/coverage/reports/lcov-report/index.html"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/elgubenis/dang.git"
+  },
+  "author": "Linus Gubenis",
+  "license": "GPL-3.0",
+  "bugs": {
+    "url": "https://github.com/elgubenis/dang/issues"
+  },
+  "homepage": "https://github.com/elgubenis/dang",
+  "devDependencies": {
+    "chai": "^3.2.0",
+    "grunt": "^0.4.5",
+    "grunt-cli": "^0.1.13",
+    "grunt-contrib-clean": "^0.6.0",
+    "grunt-contrib-coffee": "^0.13.0",
+    "grunt-contrib-uglify": "^0.9.2",
+    "grunt-contrib-watch": "^0.6.1",
+    "grunt-env": "^0.4.4",
+    "grunt-istanbul": "^0.6.1",
+    "grunt-mocha-test": "^0.12.7",
+    "jit-grunt": "^0.9.1",
+    "mocha": "^2.3.0",
+    "underscore": "^1.8.3"
+  },
+  "dependencies": {
+    "eventemitter3": "^1.1.1",
+    "lodash": "^3.10.1"
+  }
+}
