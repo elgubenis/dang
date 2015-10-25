@@ -20,6 +20,10 @@ describe 'module behavior', ->
       store.add name: 'c', value: 100
       assert.equal store.stack.length, 3
 
+    it 'should also be able to add data in another fashion', ->
+      store.add 'd', 100, 'b+c'
+      assert.equal store.get('d').value(), 100
+
     it 'should be able to retrieve data', ->
       assert.equal handle.value(), 1
 
