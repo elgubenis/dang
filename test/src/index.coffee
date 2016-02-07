@@ -58,32 +58,13 @@ describe 'standalone test', ->
       assert.equal store.get('E').value(), 89875517873681760
       done()
 
+describe 'using result', ->
+  it 'should be possible to evaluate ifs', (done) ->
+    store = new Dang()
 
+    store.add 'a', 99
+    store.add 'b', 99
+    store.add 'result', 0, 'if (this.a) { result(0); }'
 
-
-
-
-  # store = new Dang
-
-  # cells = {}
-
-  # columns = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L']
-  # rows = 50
-
-  # for column in columns
-  #   for i in [1...rows]
-  #     store.add name: column+i, value: ''
-
-  # store.get('K40').set 'expression', 'A1+A2+A3'
-
-  # store.get('K40').on 'change:value', ->
-  #   console.log 'K40 is now', store.get('K40').value()
-  #   store.get('A3').value store.get('K40').value()
-
-  # store.get('A1').value(1)
-  # store.get('A2').value(5)
-  # store.get('A3').value(100)
-
-
-
-  #total.evaluate(store.stack)
+    store.get('result').on 'change:value', ->
+      done()

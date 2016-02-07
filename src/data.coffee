@@ -8,6 +8,7 @@ class Data extends EventEmitter
       @value(json.value)
     delete json.value
     _.assign @properties, json
+    return
   get: (name) ->
     return @properties[name] or undefined
   value: (value) ->
@@ -23,11 +24,10 @@ class Data extends EventEmitter
   evaluate: ->
     expression = @get('expression')
     if expression
-      if expression.indexOf('return') is -1
-        expression = 'return ' + expression
       myEval.call(@stack, expression, (result) =>
         @value(result)
       )
+    return
   attachListeners: (originalStack) ->
     expression = @get('expression')
 
@@ -59,10 +59,22 @@ createScope = (stack) ->
     scope[data.get('name')] = val
   return scope
 
-myEval = _.debounce (exp, cb) ->
+myEval = _.debounce (exp, result) ->
   scope = createScope(@)
-  x = (new Function 'with(this) { ' + exp + ' }').call(scope)
-  cb(x)
+  if exp.indexOf('if (') > -1
+    exp = '(function() { ' + exp + ' }.call(this))'
+    #exp = makeLocal(exp, scope)
+    (->
+      eval(exp)
+    ).call(scope)
+
+  else
+    if exp.indexOf('return') is -1
+      exp = 'return ' + exp
+    x= (new Function 'with(this) { ' + exp + ' }').call(scope)
+    if x then result(x)
 , 0
 
-
+makeLocal = (exp, scope) ->
+  #for vr of scope
+    #exp.replace(new RegExp(vr, 'gi'), '')
